@@ -1,6 +1,7 @@
 (prelude-require-packages '(moe-theme
                             powerline
                             flx
+                            window-numbering
                             smooth-scroll))
 
 (require 'flx) ;; fix: missing face flx-highlight-face on mac os
