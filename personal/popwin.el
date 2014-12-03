@@ -3,7 +3,7 @@
 
 (popwin-mode +1)
 
-(setq popwin:reuse-window nil)
+(setq popwin:reuse-window t)
 
 (setq popwin:special-display-config
       (quote
