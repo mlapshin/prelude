@@ -1,6 +1,6 @@
 ;;; prelude-core.el --- Emacs Prelude: Core Prelude functions.
 ;;
-;; Copyright © 2011-2013 Bozhidar Batsov
+;; Copyright © 2011-2015 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -181,16 +181,6 @@ point reaches the beginning or end of the buffer, stop there."
                       'display '(left-fringe right-triangle))
           'modification-hooks '(prelude-todo-ov-evaporate)))
 
-(defun prelude-copy-file-name-to-clipboard ()
-  "Copy the current buffer file name to the clipboard."
-  (interactive)
-  (let ((filename (if (equal major-mode 'dired-mode)
-                      default-directory
-                    (buffer-file-name))))
-    (when filename
-      (kill-new filename)
-      (message "Copied buffer file name '%s' to the clipboard." filename))))
-
 (defun prelude-get-positions-of-line-or-region ()
   "Return positions (beg . end) of the current line
 or region."
@@ -367,11 +357,12 @@ Repeated invocations toggle between the two most recently open buffers."
   "Kill all buffers but the current one.
 Doesn't mess with special buffers."
   (interactive)
-  (-each
-   (->> (buffer-list)
-     (-filter #'buffer-file-name)
-     (--remove (eql (current-buffer) it)))
-   #'kill-buffer))
+  (when (y-or-n-p "Are you sure you want to kill all buffers but the current one? ")
+    (-each
+        (->> (buffer-list)
+             (-filter #'buffer-file-name)
+             (--remove (eql (current-buffer) it)))
+      #'kill-buffer)))
 
 (defun prelude-create-scratch-buffer ()
   "Create a new scratch buffer."
@@ -486,6 +477,9 @@ With a prefix argument ARG, find the `user-init-file' instead."
   `(lambda (&optional arg)
      (interactive "P")
      (sp-wrap-with-pair ,s)))
+
+;; needed for prelude-goto-symbol
+(require 'imenu)
 
 (defun prelude-goto-symbol (&optional symbol-list)
   "Refresh imenu and jump to a place in the buffer using Ido."
