@@ -29,7 +29,8 @@
                 c++-mode-hook
                 ibuffer-mode-hook
                 magit-mode-hook
-                nxml-mode-hook))
+                nxml-mode-hook
+                js2-mode-hook))
   (add-hook hook 'ml-unset-hjkl-keys))
 
 ;; HJKL for ido
