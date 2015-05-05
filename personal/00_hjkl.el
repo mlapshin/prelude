@@ -29,6 +29,7 @@
                 c++-mode-hook
                 ibuffer-mode-hook
                 magit-mode-hook
+                xml-mode-hook
                 nxml-mode-hook
                 js2-mode-hook))
   (add-hook hook 'ml-unset-hjkl-keys))

@@ -1,3 +1,4 @@
+(require 'prelude-company)
 (require 'prelude-ido)
 (require 'prelude-emacs-lisp)
 (require 'prelude-clojure)
@@ -8,3 +9,4 @@
 (require 'prelude-xml)
 (require 'prelude-shell)
 (require 'prelude-js)
+(require 'prelude-go)

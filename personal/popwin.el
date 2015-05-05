@@ -26,6 +26,7 @@
         ("*slime-macroexpansion*")
         ("*slime-description*")
         ("*slime-compilation*" :noselect t)
+        ("*Gofmt Errors*" :noselect t)
         ("*slime-xref*")
         (sldb-mode :stick t)
         (slime-repl-mode)

@@ -27,7 +27,7 @@
   (dolist (face '(font-lock-keyword-face))
     (set-face-attribute face nil :weight 'bold))
 
-  (set-face-attribute 'window-numbering-face nil :foreground "black" :weight 'bold)
+  (set-face-attribute 'window-numbering-face nil :foreground "#101010" :weight 'bold)
   (set-face-attribute 'flx-highlight-face nil :inherit 'highlight :underline nil)
   (set-face-attribute 'flycheck-warning nil :inherit 'unspecified)
 
@@ -67,9 +67,13 @@
 
   (set-face-attribute 'whitespace-line nil
                       :foreground 'unspecified
-                      :background "#4e4e4e"))
+                      :background "#4e4e4e")
 
-(ml-light-theme)
+  ;; TODO: fix it
+  (set-face-attribute 'default nil
+                      :background 'unspecified))
+
+(ml-dark-theme)
 
 (add-hook 'after-init-hook 'ml-customize-faces)
 (when window-system (add-hook 'after-init-hook 'ml-customizations-for-window-system))
