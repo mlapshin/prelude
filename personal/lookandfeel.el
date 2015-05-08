@@ -1,12 +1,10 @@
 (prelude-require-packages '(moe-theme
-                            powerline
                             flx
                             window-numbering
                             smooth-scroll))
 
 (require 'flx) ;; fix: missing face flx-highlight-face on mac os
 
-(require 'powerline)
 (require 'moe-theme)
 (require 'smooth-scroll)
 
@@ -35,8 +33,6 @@
     (set-face-attribute face nil :background 'unspecified)))
 
 (defun ml-customizations-for-window-system ()
-  (require 'powerline)
-  (powerline-default-theme)
   (set-face-attribute 'default nil :height 135))
 
 (defun ml-light-theme ()
