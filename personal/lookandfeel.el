@@ -56,7 +56,8 @@
                       :background "white"
                       :foreground 'unspecified)
 
-  (moe-light))
+  (moe-light)
+  (powerline-moe-theme))
 
 (defun ml-dark-theme ()
   (interactive)
@@ -64,6 +65,7 @@
   (setq moe-theme-mode-line-color 'orange)
 
   (moe-dark)
+  (powerline-moe-theme)
 
   (set-face-attribute 'whitespace-line nil
                       :foreground 'unspecified
