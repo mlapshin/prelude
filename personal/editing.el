@@ -4,7 +4,7 @@
 
 (global-set-key (kbd "C-c >") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-c <") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c .") 'mc/mark-all-dwim)
+(global-set-key (kbd "C-n") 'mc/mark-all-dwim)
 
 (defun ml-move-line-up ()
   "Move the current line up."
@@ -19,8 +19,8 @@
   (transpose-lines 1)
   (forward-line -1))
 
-(global-set-key (kbd "C-n") 'ml-move-line-down)
-(global-set-key (kbd "C-p") 'ml-move-line-up)
+;; (global-set-key (kbd "C-n") 'ml-move-line-down)
+;; (global-set-key (kbd "C-p") 'ml-move-line-up)
 
 (defun uniq-lines (beg end)
   "Unique lines in region.
@@ -45,7 +45,7 @@ BEG and END (region to sort)."
   (interactive "p")
   (if (region-active-p)
       (kill-region (point) (mark))
-    (backward-kill-word arg)))
+    (subword-backward-kill arg)))
 
 (global-set-key (kbd "C-w") 'backward-kill-word-or-region)
 (global-set-key (kbd "C-x C-w") 'whitespace-cleanup)
