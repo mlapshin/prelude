@@ -18,7 +18,9 @@
 (setq global-hl-line-mode nil
       smooth-scroll-mode t
       smooth-scroll-margin 3
-      visible-bell nil)
+      visible-bell nil
+      which-function-mode nil
+      which-func-mode nil)
 
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
@@ -29,13 +31,16 @@
     (set-face-attribute face nil :weight 'bold))
 
   (set-face-attribute 'window-numbering-face nil
-                      :foreground "#101010" :weight 'bold)
+                      :foreground "black" :weight 'bold)
 
   (set-face-attribute 'flx-highlight-face nil
                       :inherit 'highlight :underline nil)
 
   (set-face-attribute 'flycheck-warning nil
                       :inherit 'unspecified)
+
+  (set-face-attribute 'powerline-active2 nil
+                      :foreground "white")
 
   (set-face-attribute 'grizzl-selection-face nil
                       :inherit 'company-tooltip-common-selection)
@@ -47,6 +52,65 @@
   (require 'powerline)
   (powerline-default-theme)
   (set-face-attribute 'default nil :height 135))
+
+(defun ml-customize-powerline ()
+  (setq-default mode-line-format
+                `("%e"
+                  (:eval
+                   (let*
+                       ((active
+                         (powerline-selected-window-active))
+                        (mode-line
+                         (if active 'mode-line 'mode-line-inactive))
+                        (face1
+                         (if active 'powerline-active1 'powerline-inactive1))
+                        (face2
+                         (if active 'powerline-active2 'powerline-inactive2))
+
+                        (separator-left
+                         (intern
+                          (format "powerline-%s-%s"
+                                  (powerline-current-separator)
+                                  (car powerline-default-separator-dir))))
+
+                        (separator-right
+                         (intern
+                          (format "powerline-%s-%s"
+                                  (powerline-current-separator)
+                                  (cdr powerline-default-separator-dir))))
+                        (lhs
+                         (list
+                          (powerline-raw "%*" nil 'l)
+
+                          (powerline-raw "[%l" nil 'l)
+                          (powerline-raw ":" nil 'l)
+                          (powerline-raw "%c]" nil 'r)
+
+                          (powerline-buffer-id nil 'l)
+                          (powerline-raw " ")
+                          (funcall separator-left mode-line face1)
+
+                          (powerline-major-mode face1 'l)
+                          (powerline-process face1)
+                          ;; (powerline-minor-modes face1 'l)
+                          (powerline-narrow face1 'l)
+                          (powerline-raw " " face1)
+                          (funcall separator-left face1 face2)
+                          (powerline-vc face2 'r)))
+                        (rhs
+                         (list
+                          (powerline-raw global-mode-string face2 'r)
+                          (funcall separator-right face2 face1)
+
+                          (powerline-raw " " face1)
+                          (powerline-raw "%I" face1 'r))))
+
+                     (concat
+                      (powerline-render lhs)
+                      (powerline-fill face2
+                                      (powerline-width rhs))
+                      (powerline-render rhs))))))
+  (force-mode-line-update t))
 
 (defun ml-light-theme ()
   (interactive)
@@ -66,7 +130,8 @@
                       :foreground 'unspecified)
 
   (moe-light)
-  (powerline-moe-theme))
+  (powerline-moe-theme)
+  (ml-customize-powerline))
 
 (defun ml-dark-theme ()
   (interactive)
@@ -75,6 +140,7 @@
 
   (moe-dark)
   (powerline-moe-theme)
+  (ml-customize-powerline)
 
   (set-face-attribute 'whitespace-line nil
                       :foreground 'unspecified
