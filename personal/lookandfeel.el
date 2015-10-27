@@ -38,7 +38,7 @@
                       :inherit 'unspecified)
 
   (set-face-attribute 'powerline-active2 nil
-                      :foreground "white")
+                      :foreground "white" :background "black")
 
   (set-face-attribute 'grizzl-selection-face nil
                       :inherit 'company-tooltip-common-selection)
