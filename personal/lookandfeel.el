@@ -1,15 +1,34 @@
 (prelude-require-packages '(moe-theme
                             flx
                             window-numbering
+                            golden-ratio
                             smooth-scroll))
 
 (require 'flx) ;; fix: missing face flx-highlight-face on mac os
-
 (require 'moe-theme)
 (require 'smooth-scroll)
+
 ;; jump between windows by numbers
 (require 'window-numbering)
 (window-numbering-mode t)
+
+(use-package golden-ratio
+  :init
+  (setq golden-ratio-extra-commands
+        (append golden-ratio-extra-commands
+                '(select-window-0
+                  select-window-1
+                  select-window-2
+                  select-window-3
+                  select-window-4
+                  select-window-5
+                  select-window-6
+                  select-window-7
+                  select-window-8
+                  select-window-9)))
+  (setq golden-ratio-adjust-factor 1.1)
+  :config
+  (golden-ratio-mode 1))
 
 (setq global-hl-line-mode nil
       smooth-scroll-mode t
