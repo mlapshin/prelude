@@ -1,5 +1,5 @@
 (require 'prelude-company)
-(require 'prelude-ido)
+;; (require 'prelude-ido)
 (require 'prelude-emacs-lisp)
 (require 'prelude-clojure)
 (require 'prelude-key-chord)

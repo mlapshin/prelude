@@ -34,23 +34,7 @@
                 js2-mode-hook))
   (add-hook hook 'ml-unset-hjkl-keys))
 
-;; HJKL for ido
-(add-hook 'ido-setup-hook
-          (lambda ()
-            (define-key ido-completion-map (kbd "<tab>") 'ido-exit-minibuffer)
-            (define-key ido-completion-map (kbd "M-l") 'ido-next-match)
-            (define-key ido-completion-map (kbd "M-h") 'ido-prev-match)
-            (define-key ido-completion-map (kbd "M-j") 'ido-next-match)
-            (define-key ido-completion-map (kbd "M-k") 'ido-prev-match)))
-
 (eval-after-load 'browse-kill-ring
   '(progn
      (define-key browse-kill-ring-mode-map (kbd "M-j") 'browse-kill-ring-forward)
      (define-key browse-kill-ring-mode-map (kbd "M-k") 'browse-kill-ring-previous)))
-
-(eval-after-load 'grizzl-read
-  '(progn
-     (define-key *grizzl-keymap* (kbd "M-k") 'grizzl-set-selection+1)
-     (define-key *grizzl-keymap* (kbd "M-K") (lambda () (interactive) (grizzl-move-selection +5)))
-     (define-key *grizzl-keymap* (kbd "M-j") 'grizzl-set-selection-1)
-     (define-key *grizzl-keymap* (kbd "M-J") (lambda () (interactive) (grizzl-move-selection -5)))))

@@ -7,8 +7,6 @@
 
 (require 'moe-theme)
 (require 'smooth-scroll)
-(require 'grizzl)
-
 ;; jump between windows by numbers
 (require 'window-numbering)
 (window-numbering-mode t)
@@ -38,9 +36,6 @@
 
   (set-face-attribute 'powerline-active2 nil
                       :foreground "white" :background "black")
-
-  (set-face-attribute 'grizzl-selection-face nil
-                      :inherit 'company-tooltip-common-selection)
 
   (dolist (face '(whitespace-empty whitespace-hspace))
     (set-face-attribute face nil :background 'unspecified)))
@@ -151,16 +146,3 @@
 (when window-system
   (add-hook 'after-init-hook
             'ml-customizations-for-window-system))
-
-(defun ml-temporary-remove-minibuff-background (orig-fun &rest args)
-  (let ((original-bg (face-attribute 'minibuffer-prompt :background)))
-    (set-face-attribute 'minibuffer-prompt nil :background nil)
-
-    (let ((res (unwind-protect
-                   (apply orig-fun args)
-                 (set-face-attribute 'minibuffer-prompt nil
-                                     :background original-bg))))
-      res)))
-
-(advice-add 'grizzl-completing-read
-            :around #'ml-temporary-remove-minibuff-background)
