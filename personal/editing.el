@@ -1,6 +1,6 @@
 (prelude-require-package 'multiple-cursors)
 (require 'multiple-cursors)
-(set-default 'truncate-lines nil)
+(set-default 'truncate-lines t)
 
 (global-set-key (kbd "C-c >") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-c <") 'mc/mark-previous-like-this)
@@ -21,6 +21,15 @@
 
 ;; (global-set-key (kbd "C-n") 'ml-move-line-down)
 ;; (global-set-key (kbd "C-p") 'ml-move-line-up)
+
+(defun ml-unfill-paragraph (&optional region)
+  "Takes a multi-line paragraph and makes it into a single line
+of text."
+  (interactive (progn (barf-if-buffer-read-only) '(t)))
+  (let ((fill-column (point-max)))
+    (fill-paragraph nil region)))
+
+(global-set-key (kbd "M-Q") 'ml-unfill-paragraph)
 
 (defun uniq-lines (beg end)
   "Unique lines in region.

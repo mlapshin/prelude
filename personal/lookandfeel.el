@@ -17,8 +17,7 @@
       smooth-scroll-mode t
       smooth-scroll-margin 3
       visible-bell nil
-      which-function-mode nil
-      which-func-mode nil)
+      which-function-mode nil)
 
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
@@ -78,8 +77,7 @@
                          (list
                           (powerline-raw "%*" nil 'l)
 
-                          (powerline-raw "[%l" nil 'l)
-                          (powerline-raw ":" nil 'l)
+                          (powerline-raw "[%l " nil 'l)
                           (powerline-raw "%c]" nil 'r)
 
                           (powerline-buffer-id nil 'l)
