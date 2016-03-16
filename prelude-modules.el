@@ -2,7 +2,7 @@
 ;; (require 'prelude-ido)
 (require 'prelude-emacs-lisp)
 (require 'prelude-clojure)
-(require 'prelude-key-chord)
+;;(require 'prelude-key-chord)
 (require 'prelude-css)
 (require 'prelude-coffee)
 (require 'prelude-web)

@@ -66,6 +66,8 @@ BEG and END (region to sort)."
 (delete-selection-mode +1)    ;; replace region with new content
 (setq shift-select-mode -1) ;; disable selection with SHIFT
 
+(setq kill-do-not-save-duplicates 't)
+
 (defadvice kill-line (before check-position activate)
   "Call `just-one-space' after `kill-line'."
   (if (and (eolp) (not (bolp)))

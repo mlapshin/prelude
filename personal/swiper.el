@@ -36,5 +36,6 @@
          :map ivy-minibuffer-map
          ("M-j" . ivy-next-line)
          ("M-k" . ivy-previous-line)
+         ("C-M-w" . ivy-yank-word)
          ("RET" . ivy-alt-done)
          ("C-w" . ivy-backward-kill-word)))
