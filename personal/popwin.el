@@ -15,6 +15,7 @@
         (completion-list-mode :noselect t)
         (compilation-mode :noselect t :tail t)
         (grep-mode :noselect t :stick t)
+        ("*HTTP Response*" :noselect t :stick t)
         (occur-mode :noselect t)
         ("*Pp Macroexpand Output*" :noselect t)
         ("*Shell Command Output*" :tail t)

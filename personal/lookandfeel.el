@@ -7,6 +7,7 @@
 (require 'flx) ;; fix: missing face flx-highlight-face on mac os
 (require 'moe-theme)
 (require 'smooth-scroll)
+(require 'cl-lib)
 
 ;; jump between windows by numbers
 (require 'window-numbering)
@@ -52,8 +53,10 @@
   (set-face-attribute 'flycheck-warning nil
                       :inherit 'unspecified)
 
-  (set-face-attribute 'powerline-active2 nil
-                      :foreground "white" :background "black")
+
+  (when (not window-system)
+    (set-face-attribute 'powerline-active2 nil
+                        :foreground "white" :background "black"))
 
   (dolist (face '(whitespace-empty whitespace-hspace))
     (set-face-attribute face nil :background 'unspecified)))
@@ -61,7 +64,33 @@
 (defun ml-customizations-for-window-system ()
   (set-face-attribute 'default nil :height 135))
 
-(defun ml-customize-powerline ()
+(defvar ml-minor-modes-filter "\\(ivy\\|guru\\|Golden\\|SScr\\|company\\|ws\\|SP\\)")
+
+(defpowerline ml-filtered-minor-modes
+  (mapconcat (lambda (mm)
+               (propertize mm
+                           'mouse-face 'mode-line-highlight
+                           'help-echo "Minor mode\n mouse-1: Display minor mode menu\n mouse-2: Show help for minor mode\n mouse-3: Toggle minor modes"
+                           'local-map (let ((map (make-sparse-keymap)))
+                                        (define-key map
+                                          [mode-line down-mouse-1]
+                                          (powerline-mouse 'minor 'menu mm))
+                                        (define-key map
+                                          [mode-line mouse-2]
+                                          (powerline-mouse 'minor 'help mm))
+                                        (define-key map
+                                          [mode-line down-mouse-3]
+                                          (powerline-mouse 'minor 'menu mm))
+                                        (define-key map
+                                          [header-line down-mouse-3]
+                                          (powerline-mouse 'minor 'menu mm))
+                                        map)))
+             (cl-remove-if (lambda (m) (string-match-p ml-minor-modes-filter m))
+                           (split-string (format-mode-line minor-mode-alist)))
+             (propertize " " 'face face)))
+
+(defun ml-powerline-theme ()
+  (interactive)
   (setq-default mode-line-format
                 `("%e"
                   (:eval
@@ -99,7 +128,7 @@
 
                           (powerline-major-mode face1 'l)
                           (powerline-process face1)
-                          ;; (powerline-minor-modes face1 'l)
+                          (ml-filtered-minor-modes face1 'l)
                           (powerline-narrow face1 'l)
                           (powerline-raw " " face1)
                           (funcall separator-left face1 face2)
@@ -138,7 +167,7 @@
 
   (moe-light)
   (powerline-moe-theme)
-  (ml-customize-powerline))
+  (ml-powerline-theme))
 
 (defun ml-dark-theme ()
   (interactive)
@@ -147,7 +176,7 @@
 
   (moe-dark)
   (powerline-moe-theme)
-  (ml-customize-powerline)
+  (ml-powerline-theme)
 
   (set-face-attribute 'whitespace-line nil
                       :foreground 'unspecified
@@ -160,7 +189,3 @@
 (ml-dark-theme)
 
 (add-hook 'after-init-hook 'ml-customize-faces)
-
-(when window-system
-  (add-hook 'after-init-hook
-            'ml-customizations-for-window-system))
