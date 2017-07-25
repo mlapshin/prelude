@@ -30,3 +30,20 @@
     ;; http://shreevatsa.wordpress.com/2006/10/22/emacs-copypaste-and-x/
     ;; http://www.mail-archive.com/help-gnu-emacs@gnu.org/msg03577.html
     ))
+
+(defun ml-term-exec-hook ()
+  (let* ((buff (current-buffer))
+         (proc (get-buffer-process buff)))
+
+    (set-process-sentinel
+     proc
+     `(lambda (process event)
+        (if (string= event "finished\n")
+            (kill-buffer ,buff))))))
+
+(use-package term
+  :config
+  (add-hook 'term-exec-hook 'ml-term-exec-hook)
+
+  :bind (:map term-raw-map
+              ("C-y" . term-paste)))

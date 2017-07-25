@@ -54,9 +54,13 @@ BEG and END (region to sort)."
   (interactive "p")
   (if (region-active-p)
       (kill-region (point) (mark))
-    (if (bound-and-true-p subword-mode)
-        (subword-backward-kill arg)
-      (backward-kill-word arg))))
+
+    (if (bound-and-true-p smartparens-mode)
+        (sp-backward-kill-word arg)
+
+      (if (bound-and-true-p subword-mode)
+          (subword-backward-kill arg)
+        (backward-kill-word arg)))))
 
 (global-set-key (kbd "C-w") 'backward-kill-word-or-region)
 (global-set-key (kbd "C-x C-w") 'whitespace-cleanup)

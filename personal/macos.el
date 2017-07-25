@@ -1,4 +1,6 @@
 (when (eq system-type 'darwin)
+  (setenv "LANG" "en_US.UTF-8")
+
   (defun ml-mac-copy ()
     (shell-command-to-string "pbpaste"))
 
