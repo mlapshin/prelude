@@ -15,11 +15,14 @@ custom.el
 places
 .smex-items
 savefile/
-/prelude-modules.el
 projectile-bookmarks.eld
 session*
 .cask
 tramp
 /var/pcache
-/ac-comphist.dat
-/smex-items
+.emacs.desktop
+.emacs.desktop.lock
+network-security.data
+prelude-cheatsheet.el
+prelude-cheatsheet.aux
+prelude-cheatsheet.log
