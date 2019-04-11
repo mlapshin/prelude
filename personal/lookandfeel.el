@@ -2,6 +2,8 @@
                             flx
                             window-numbering
                             golden-ratio
+                            beacon
+                            powerline
                             smooth-scroll))
 
 (require 'flx) ;; fix: missing face flx-highlight-face on mac os
@@ -39,6 +41,7 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
+(beacon-mode -1)
 
 (defun ml-customize-faces ()
   (dolist (face '(font-lock-keyword-face))

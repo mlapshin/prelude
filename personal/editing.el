@@ -65,7 +65,7 @@ BEG and END (region to sort)."
 (global-set-key (kbd "C-w") 'backward-kill-word-or-region)
 (global-set-key (kbd "C-x C-w") 'whitespace-cleanup)
 
-(global-set-key (kbd "M-RET") 'prelude-duplicate-current-line-or-region)
+(global-set-key (kbd "M-RET") 'crux-duplicate-current-line-or-region)
 
 (delete-selection-mode +1)    ;; replace region with new content
 (setq shift-select-mode -1) ;; disable selection with SHIFT

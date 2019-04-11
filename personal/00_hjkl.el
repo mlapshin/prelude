@@ -28,11 +28,16 @@
 (dolist (hook '(c-mode-hook
                 c++-mode-hook
                 ibuffer-mode-hook
+                smartparens-mode-hook
                 magit-mode-hook
                 xml-mode-hook
                 nxml-mode-hook
                 js2-mode-hook))
   (add-hook hook 'ml-unset-hjkl-keys))
+
+(eval-after-load 'smartparens
+  '(progn
+     (define-key smartparens-mode-map (kbd "M-j") nil)))
 
 (eval-after-load 'browse-kill-ring
   '(progn
